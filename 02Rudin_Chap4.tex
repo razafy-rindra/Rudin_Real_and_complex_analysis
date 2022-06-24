@@ -1,0 +1,204 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{chngcntr}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{cancel}
+\usepackage{tikz}
+%\usepackage[dvipsnames]{xcolor}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem] 
+\newtheorem{lemma}[theorem]{Lemma} 
+\newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{example}{Example}[definition]
+\newcounter{exercise}[subsection]
+\newenvironment{exercise}{\setcounter{equation}{0}\refstepcounter{exercise}\textbf{Exercise~\theexercise}}{}
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+
+
+
+
+\title{}
+\author{}
+\date{}
+\begin{document}
+	Papa Rudin Chapter 4 solutions:
+    These are some of my solutions for the exercises in chapter 4 of ``Real and Complex Analysis'', 3rd edition, by Rudin.
+That I wrote out in 2022, in preperation for graduate studies. 
+
+    \
+
+
+    \begin{exercise}
+       \textbf{If M is a closed subspace of H, then} $M={(M^\perp)}^\perp$; \textbf{ does a similar statement hold if for M not necessarly closed?}
+
+       First of all, let us assume that M is closed. Let $x\in {(M^\perp)}^\perp$; since M is closed we know that there exists:
+       \begin{align}
+              P &\colon H\rightarrow M\\
+              Q &\colon H\rightarrow M^\perp
+    \end{align}
+
+Such that $x = Px + Qx$, now let $y\in M^\perp$ be arbitrary. Notice that:
+\[0 = (x,y) = \cancelto{0}{(Px,y)} + (Qx,y), \  \ \forall y\in M^\perp\]
+\[\therefore Qx\in {(M^\perp)}^\perp\]
+
+So we conclude that $Qx\in {(M^\perp)}^\perp\cap (M^\perp)$, which implies that $(Qx,Qx) = 0$ so $Qx=0$.
+
+From this we see that \[x=Px\in M\]
+\[\therefore {(M^\perp)}^\perp\subseteq M\]
+
+But notice that the other inclusion is clear, by the definition of $M^\perp$, for all $x\in M$ we have $(x,y) = 0$ for all $x\in M^\perp$ so $x\in {(M^\perp)}^\perp$
+ 
+Now what if $M$ is not closed? Well notice that:\[{(M^\perp)}^\perp = \bigcap_{x\in M^\perp}x^\perp\]
+Recall that \[x^\perp = \{y\in H \mid (x,y) = 0\} = \varphi_x^{-1}(0)\]
+Where \begin{align}
+    \varphi_x&\colon H\rightarrow \C\\
+    &y\rightarrow (x,y)
+\end{align}
+We will show that $x^\perp$ is closed for all $x\in H$, it is clear for $x=0$ so we can assume that $x\neq 0$. 
+
+\
+
+Let $y_n\rightarrow y_0$ in $H$, then let $\epsilon>0$ and $N\in\N^\ast$ such that 
+for all $n\geq N$: \[||y_n-y_0||<\frac{\epsilon}{||x||}\]
+
+So we have:\begin{align*}
+    |\varphi_x(y_0)-\varphi_x(y_n)| &= |(x,y_0-y_n)|\\
+    &\leq ||x||\cdot||y_0-y_n|| \text{ by Cauchy-Schwartz}\\
+    &<\epsilon
+\end{align*}
+So $\varphi_x$ is continuous, so we indeed see that $x^\perp$ is closed for all $x\in H$, so in particular it is closed
+for all $x\in {(M^\perp)}^\perp$, so ${(M^\perp)}^\perp$ is closed and contains $M$. So we have:\begin{equation}
+    M\neq \overline{M}\subseteq {(M^\perp)}^\perp
+\end{equation}
+$\blacksquare$
+\end{exercise}
+
+\
+
+\
+
+
+\begin{exercise}\textbf{ Let }${\{x_n\}}_{n=1}^\infty$\textbf{ be a linearly independent set of vectors in H}.
+    \textbf{Let:}\[u_1 = \frac{x_1}{||x_1||}; \ u_n = \frac{v_n}{||v_n||} \text{ where }v_n = x_n-\sum_{i=1}^{n-1}(x_n,u_i)u_i\]
+\textbf{Show that } $\{u_n\}$ \textbf{ is an orthonormal set such that: } $span\{x_1,\dots,x_N\} = span\{u_1,\dots,u_N\} \ \forall N$.
+
+\
+
+Since \[||u_n|| = \begin{cases}
+    ||\frac{x_1}{|x_1|}|| = 1 \text{ if }n=1\\
+    ||\frac{v_n}{||v_n||}|| = 1 \text{ otherwise}
+\end{cases}\]
+We will use induction to show that for all $n\in \N^\ast$, we have $(u_n,u_k) = 0$ for $k<n$:\begin{itemize}
+    \item Note that \begin{equation}
+        (u_2,u_1) = \frac{1}{||x_1||\cdot||v_2||}\bigg(x_2-\frac{1}{||x_1||}\cancelto{0}{(x_2,x_1)}u_1,x_1\bigg) = \frac{1}{||x_1||\cdot||v_2||}(x_2,x_1) = 0
+    \end{equation}
+
+    \item Now assume that this is true for all $2\leq i<n$, and let $k<n$\begin{align}
+        (u_k,u_n) &= \frac{1}{||v_n||}(u_k, x_n - \sum_{i=1}^{n-1}(x_n,u_i)u_i)\\
+        &= \frac{1}{||v_n||}\bigg((u_k,x_n)-\sum_{i=1}^{n-1}(u_k, (x_n,u_i)u_i)\bigg)\\
+        &= \frac{1}{||v_n||}\bigg((u_k,x_n)-\sum_{i=1}^{n-1}\overline{(x_n,u_i)}(u_k, u_i)\bigg)\\
+        &= \frac{1}{||v_n||}\bigg((u_k,x_n)-\sum_{i=1}^{n-1}{(u_i,x_n)}\delta_{ik}\bigg)\\
+        &= \frac{1}{||v_n||}\bigg((u_k,x_n)-(u_k,x_n)\bigg)\\
+        &= 0
+    \end{align}
+\end{itemize}
+
+So now let $n,m\in \N^\ast$ then WLOG $n\leq m$ so $(u_n,u_m) = \delta_{n,m}$
+
+\
+
+Now we will show that $span\{x_1,\dots,x_N\} = span\{u_1,\dots,u_N\}$ for all $N$.
+
+\
+
+Indeed, let $N\in\N^\ast$ then notice that: $u_i\in span\{x_1,\dots,x_N\}$ for $1\leq i \leq N$, therefore we see that \begin{equation}
+    span\{x_1,\dots,x_N\}\supseteq span\{u_1,\dots,u_N\}
+\end{equation}
+
+Now note that \begin{align}
+    x_1 &= ||x_1||u_1\in span\{u_1,\dots,u_N\}\\
+    x_n &= ||v_n||u_n + \sum_{i=1}^{n-1}(x_n,u_i)u_i\in span\{u_1,\dots,u_n\}
+\end{align}
+So we indeed see that these two sets have the same $span$.
+
+$\blacksquare$
+\end{exercise}
+
+\
+
+\begin{exercise}
+    
+\end{exercise}
+
+\
+
+\begin{exercise}
+
+\end{exercise}
+
+\
+
+\begin{exercise}\textbf{. Let }$M=\{x\in H \mid Lx=0\}\neq H$\textbf{, where }L\textbf{ is a continuous, linear functional. Then }$M^\perp$\textbf{ is a space of dimension }$1$.
+
+    \
+
+(Note that if $M=H$, then $M^\perp = \{0\}$, is of dimension 0).
+
+\
+
+Recall that there exists a unique $y\in H\setminus\{0\}$ such that:\begin{equation}
+    L(x) = (x,y) \text{ for all }x\in H
+\end{equation}
+
+Now notice that for all $x\in M$ we have $(x,y) = L(x) = 0$. $ \ \therefore y\in M^\perp$.
+
+Let $z\in M^\perp\setminus\{0\}$, and $x\in H$. Recall that since \begin{equation}
+    u = L(x)z-L(z)x\in M
+\end{equation}
+We have:\begin{align}
+    &0 = (u,z) = L(x)(z,z)-L(z)(x,z)\\
+    &\therefore L(x)(z,z) = L(z)(x,z)
+\end{align}
+So for all $x\in H$: \begin{equation}
+    L(x) = \frac{L(x)}{||z||^2}(z,z) = \frac{L(x)}{||z||^2}(x,z) = (x,\overline{\frac{L(z)}{||z||^2}}z) 
+\end{equation}
+So by uniquness of $y$ we see that, $y=\overline{\frac{L(z)}{||z||^2}}z$. So $z = \alpha y$ for some $\alpha\in \C$.
+
+So we see that $M^\perp = \{\alpha y\mid \alpha\in \C\}$, so $\dim(M^\perp) = 1$.
+
+\
+
+$\blacksquare$
+\end{exercise}
+\begin{exercise}
+    
+\end{exercise}
+
+
+\end{document}

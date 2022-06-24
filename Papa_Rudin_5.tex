@@ -1,0 +1,395 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{chngcntr}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{cancel}
+\usepackage{tikz}
+%\usepackage[dvipsnames]{xcolor}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem] 
+\newtheorem{lemma}[theorem]{Lemma} 
+\newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{example}{Example}[definition]
+\newcounter{exercise}[subsection]
+\newenvironment{exercise}{\setcounter{equation}{0}\refstepcounter{exercise}\textbf{Exercise~\theexercise}}{}
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+
+
+\begin{document}
+    \textbf{Exercise 2: Prove that the unit ball (open or closed) is convex in every normed linear space.}
+\begin{proof}
+    Let $B$ be the unit ball in a normed linear space $X$, let $x,y\in B$ and $\lambda\in [0,1]$.
+    Then we have:\begin{align}
+        ||\lambda x+(1-\lambda)y|| &\leq \lambda ||x|| + (1-\lambda)||y||\\
+        &\leq \lambda + (1-\lambda)  = 1
+    \end{align}
+    $\therefore \lambda x+(1-\lambda)y\in B$.
+
+\end{proof}
+    
+    \textbf{Exercuse 8: Let }$X$\textbf{ be a normed linear space, and let }$X^\ast$\textbf{ be its dual space with the norm}\begin{equation*}
+        ||f|| = \sup\{|f(x)| \colon ||x||\leq 1 \}
+    \end{equation*}
+    \begin{enumerate}[label = (\alph*)]
+        \item \textbf{Prove that }$X^\ast$\textbf{ is a Banach space.}
+        \item \textbf{Prove that the mapping }$f\rightarrow f(x)$ \textbf{ is, for each }$x\in X$\textbf{, a bounded linear functional on }
+        $X^\ast$\textbf{, of norm }$||x||$
+        \item \textbf{Prove that }$\{||x_n||\}$ \textbf{is bounded if }$\{x_n\}$\textbf{ is a sequence in }$X$\textbf{ such that }$\{f(x_n)\}$ \textbf{ is bounded for every }$f\in X^\ast$.
+    \end{enumerate}
+\begin{proof}
+   \begin{enumerate}[label = (\alph*)]
+       \item Note is clear that $X^\ast$ is a vector space, now let $f,g\in X^\ast$ and $\alpha\in \mathbb{F}$ (where $\mathbb{F}$ is the field for which $X^\ast$ is a vs over), we have:\begin{align*}
+        &|f(x)+g(x)|\leq f(x)+g(x) \leq ||f||+||g||, \text{ for all }||x||\leq 1\\
+        &\therefore ||f+g|| = \sup\{|f(x)+g(x)| \mid ||x||\leq 1 \} \leq ||f||+||g||
+    \end{align*}
+    \begin{align*}
+        ||\alpha f|| &= \sup\{|\alpha f(x)| \mid ||x||\leq 1 \}\\
+        &= |\alpha|\sup\{|f(x)| \mid ||x||\leq 1 \}\\
+        &= |\alpha|\cdot||f||
+    \end{align*}
+    \begin{align*}
+        0\leq |f(x)| \text{ for all }x\Rightarrow 0\leq ||f||
+    \end{align*}
+    \begin{align*}
+        \text{ If }||f|| = 0 &\Rightarrow \sup\{|f(x)| \mid ||x||\leq 1 \} = 0\\
+        &\Rightarrow |f(x)| = 0\text{ for all }||x||\leq 1
+    \end{align*}
+    But in this case, notice that for all $x\in X\neq\{0\}$, we have $\frac{x}{||x||}$ has norm $1$ and:\begin{equation*}
+        |f(x)| = ||x|||f(\frac{x}{||x||})| = 0 \iff f(x) = 0.
+    \end{equation*}
+    So $f = 0$.
+
+    Finally we will show that $X^\ast$ is complete. Let $\{f_n\}$ be a cauchy sequence in $X^\ast$. So let $\epsilon>0$ and $N\geq 1$ such that for all $n,m\geq N$:
+    \begin{equation}
+        ||f_n-f_m|| < \epsilon \iff |f_n(x)-f_m(x)|<\epsilon \text{ for all }||x||\leq 1
+    \end{equation}
+    So notice this means that for all $x\in X\setminus\{0\}$, we have:\begin{equation}
+        |f_n(x)-f_m(x)| = ||x||\cdot |f_n(\frac{x}{||x||})-f_m(\frac{x}{||x||})| < ||x||\epsilon
+    \end{equation}
+
+    So $\{f_n(x)\}$ is a cauchy sequence for all $x\in X$, so we define $f\colon X\rightarrow \mathbb{F}$ by:\begin{equation}
+        f(x) = \lim_{n\rightarrow \infty}f_n(x)
+    \end{equation}
+
+    Now it is clear that $f$ is a linear map, since $\{f_n\}$ is a Cauchy sequence, it is bounded. Indeed let $N$
+ be such that $|||f_n|| - ||f_N|| |< 1 \Rightarrow ||f_n|| \leq 1+||f_N||$ for all $n\geq N$.
+So let $M$ be such that $||f_n||<M$, for all $n$,
+
+
+Therefore for $||x||\leq 1$, let $N$ be such that $|f(x)-f_N(x)|<1$:\begin{equation}
+    |f(x)|\leq |f(x)-f_N(x)|+|f_N(x)| <1+M
+\end{equation}
+So $|f(x)|<1+M$ for all $||x||\leq 1$, so we have $||f||<1+M<\infty$. So $f\in X^\ast$.
+
+\item For $x\in X$, let $\Lambda_x \colon X^\ast\rightarrow \mathbb{F}$, be $\Lambda_x(f) = f(x)$. 
+Notice that $\Lambda_x(f+g) = (f+g)(x) = f(x)+g(x) = \Lambda_x(f)+\Lambda_x(g)$ and $\Lambda_x(\alpha f) = \alpha f(x) = \alpha \Lambda_x(f)$.
+Furthermore, for $||f||\leq 1$ we have:\begin{equation}
+    |\Lambda_x(f)| = |f(x)| \leq ||f||\cdot ||x|| \leq ||x||
+\end{equation}
+So this function is indeed bounded. Now let $f\colon \{\alpha x\colon \alpha\in \mathbb{F}\} \rightarrow \mathbb{F}$ \begin{equation}
+    f(\alpha x) = \|\alpha x||
+\end{equation}
+We can extend this to a bounded linear functional on $X$, such that $||f|| = ||f||_{\{\alpha x\colon \alpha\in \mathbb{F}\}} = 1$. 
+
+So we have $|\Lambda_x(f)| = |f(x)| = ||x|| \Rightarrow ||\Lambda_x|| = ||x||$.
+
+\item For all $n\in \N^\ast$, \begin{equation}
+    F_n\colon X^\ast \rightarrow \mathbb{F} \text{ be given by }F_n(f) = f(x_n)
+\end{equation}
+Let $f$ be such that $||f||\leq 1$, we have: $|F_n(f)| = |f(x_n)| \leq ||x_n|| \iff ||F_n|| \leq ||x_n|| <\infty$.
+On the otherhand, in a method similar to in $(b)$, where we define $g(\alpha x_n) = ||\alpha x_n||$, we see that $||F_n|| = ||x_n||$
+
+Finally, note that since $\{f(x_n)\}$ is bounded for all $f$: \begin{equation}
+    \sup_{n\in \N} |F_n(f)| = \sup_{n\in \N}|f(x_n)|<\infty \  \ \forall f\in X^\ast
+\end{equation}
+So by Banach-Steinhaus, there exists a $M<\infty$ such that for all $n\in \N$, we have that:\begin{equation}
+    ||x_n|| = ||F_n|| \leq M; \text{ for all }n
+\end{equation}
+So $\{||x_n||\}$ is bounded.
+\end{enumerate}
+    
+\end{proof}
+
+    \textbf{Exercise 9. Prove the following four statements.}\begin{enumerate}[label = (\alph*)]
+        \item \textbf{If} $y=\{y_i\}\in \ell^1$\textbf{ and } $\Lambda x = \sum {x_i}{y_i}$\textbf{, for every }$x = \{x_i\}\in c_0$\textbf{, then }$\Lambda$\textbf{ is a bounded linear functional}
+        \textbf{ on }$c_0$\textbf{, and }$||\Lambda || = ||y||_1$\textbf{. Moreover, every }$\Lambda\in {(c_0)}^\ast$\textbf{ is obtained in this way. So, }${(c_0)}^\ast = \ell^1$
+        \item \textbf{In the same sense, }${(\ell^1)}^\ast = \ell^\infty$
+        \item \textbf{Every }$y\in \ell^1$\textbf{ induces a bounded linear functional on }$\ell^\infty$\textbf{, as in }$(a)$\textbf{. However, }${(\ell^\infty)}^\ast$\textbf{ contains nontrivial functionals that vanish on all of }$c_0$
+        \item $c_0$ \textbf{ and }$\ell^1$\textbf{ are seperable but} $\ell^\infty$\textbf{ is not.}
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item Let $x=\{x_i\}\in c_0$, notice that:\begin{equation}
+                |{x_i}{y_i}|\leq ||x||_\infty |y_i| \text{ for all }i
+            \end{equation}
+            Since $y\in \ell^1$, we see that $\sum ||x||_\infty |y_i|$, so by the comparision theorem, $\Lambda x = \sum {x_i}{y_i}$ converges
+            absolutely. This is true for all $x\in c_0$ so we have for $x, z=\{z_i\}\in c_0$ and $\alpha\in \C$ we have:\begin{align}
+                &\Lambda(x+z) = \sum (x_i+z_i)y_i = \sum {x_i}{y_i} + \sum {z_i}{y_i} = \Lambda x + \Lambda z
+                \\&\Lambda(\alpha x) = \sum \alpha {x_i}{y_i} = \alpha \Lambda x\\
+                &|\Lambda(x)| = |\sum {x_i}{y_i}| \leq \sum |{x_i}{y_i}| \leq ||x||_\infty \sum|y_i| = ||x||_\infty ||y||_1
+            \end{align}
+            The final equation tells us that for $||x||_\infty\leq 1$, we have $|\Lambda(x)|\leq ||y||_1$ so $\Lambda(x)$ is indeed a bounded linear functional.
+
+        %Now for all $n\in \N^\ast$ $\{e^n\} = \{{e_i}^n\}$, where ${e_i}^n = \begin{cases} &1 \text{ if i=n}\\ &0\text{ otherwise}\end{cases}$
+        Now for all $n\in \N^\ast$, let $y^n = \{{y_i}^n\}$ is such that \[{y_i}^n=\begin{cases}
+            0 \text{ if }i>n\text{ or }y_i = 0\\
+            \\
+            \frac{\bar{y_i}}{|y_i|} \text{ otherwise }
+        \end{cases}\]
+    Note is clear that $y^n\in c_0$ and that $||y^n||_\infty = 1$, now let $\epsilon>0$ and $N$ be such that for all $n\geq N$: $|\sum_{i=1}^\infty |y_i| - \sum_{i=1}^n |y_i||=\sum_{i=n+1}^\infty |y_i|<\epsilon$.
+    
+    \begin{align}
+        ||\Lambda(y^n)| - ||y||_1| &= |\sum_{i=1}^n |y_i| - \sum_{i=1}^\infty |y_i|| = \sum_{i=n+1}^\infty |y_i| < \epsilon
+    \end{align}
+    So $|\Lambda(y^n)| < ||y||_1+\epsilon$
+    We can find such an element for all $\epsilon>0$, so we see that $||\Lambda|| = ||y||_1$.
+
+    \
+
+    Now let, $\Lambda\in {(c_0)}^\ast$, we define $y=\{y_i\} = \{\Lambda(e_i)\}$, where $e_i$ is the sequence such that the $i^\text{th}$ element is $1$ and all other elements are $0$.
+
+    Now let $x^n = \{{x_i}^n\}$, where $x_i^n = \begin{cases}0 \text{ if }i> n\text{ or }y_i=0\\ \\ \frac{\bar{y_i}}{|y_i|}\text{ otherwise}\end{cases}$
+    
+    Then we have:\begin{equation}
+        |\sum_{i=1}^n |y_i|| = |\sum_{i=1}^n {y_i}{x_i}^n| = |\sum_{i=1}^n \Lambda(e_i)x_i^n| = |\Lambda(\sum_{i=1}^n {e_i}{x_i}^n )| = |\Lambda(x^n)|\leq ||\Lambda||
+    \end{equation}
+Since this is true for all $n$, and $\Lambda$ is bounded. Then we see that $\sum_{i=1}^\infty |y_i| <\infty$, so $y\in \ell^1$.
+
+Now let $x = \{x_i\}\in c_0$, then: \begin{align*}
+    \Lambda(\sum_{i=1}^n {e_i}{x_i}) = \sum_{i=1}^n x_i\Lambda(e_i) =  \sum_{i=1}^n{x_i}{y_i}
+\end{align*} 
+This is true for all $n$, so by taking limits using the fact that $\Lambda$ is bounded we get that:\begin{equation}
+    \Lambda(x) = \Lambda(\sum_{i=1}^\infty {e_i}{x_i}) = \sum_{i=1}^\infty \Lambda({e_i}){x_i} = \sum_{i=1}^\infty {y_i}{x_i} \text{ for all }x
+\end{equation}
+\item Let $\Lambda\in {(\ell^1)}^\ast$, let $y = \{y_i\}$ where $y_i = \Lambda(e_i)$, where we define $e_i$ as above. Since $||e_i||_1 = 1$ for all $i$:\begin{equation}
+    |\Lambda(e_i)| \leq ||\Lambda||, \ \forall i; \ \therefore ||y||_\infty = \sup |\Lambda(e_i)| \leq ||\Lambda||<\infty 
+\end{equation}
+For all $x=\{x_i\}\in \ell^1$ we have:\begin{equation}
+    \Lambda(x) = \sum x_i\Lambda(e_i) = \sum {x_i}{y_i}
+\end{equation}
+Now if $||x||_1\leq 1$, we see that:\begin{equation}
+    |\Lambda(x)| = |\sum x_i y_i|\leq ||y||_\infty ||x||_1\leq ||y||_\infty \Rightarrow ||\Lambda||\leq ||y||_\infty 
+\end{equation}
+Likewise since we can show that there is a $i$, such that $||e_i||_1 = 1$ and $||\Lambda(e_i) - ||y||_\infty|| = ||y_i-||y||_\infty||<\epsilon$
+So $||\Lambda|| = ||y||_\infty$.
+
+\
+
+Likewise if we have a $\{y_i\}\in \ell^\infty$, then for all $x = \{x_i\}\in \ell^1$, we see that since $|{y_i}{x_i}|\leq ||y||_\infty |x_i|$ for all $i$. Then
+$\sum y_i x_i$ converges absolutely and so if we define $\Lambda(x) = \sum y_i x_i$ for all $x\in \ell^1$ we can see similarly to before that this is a bounded 
+linear functional with $||\Lambda|| = ||y_i||_\infty$.
+
+\item Let $y = \{y_i\}\in \ell^1$, the same argument as in $(a)$ can be used to show that $\Lambda x = \sum {y_i}{x_i}$, for all $x = \{x_i\}\in \ell^\infty$.
+Is a bounded linear functional on $\ell^\infty$ with $||\Lambda|| = ||y||_1$. 
+
+\
+
+But let $c = \{\{x_n\}\in \ell^\infty \colon \{x_n\}\text{ converges in }\C \}$, now notice that $c\subseteq \ell^\infty$, since all convergent sequences are bounded.
+Furthermore, if $\{x_n\}, \{z_n\}\in c$ then from properties of the limit we have $\{x_n+z_n\}\in c$ and $\{\alpha x_n\}\in c$ for all $\alpha\in\C$.
+
+\
+
+So we see that $c$ is a subspace of $\ell^\infty$. So let us define, $\gamma\colon c\rightarrow \C$, by:\begin{equation}
+    \gamma(x) = \lim_{n\rightarrow\infty} x_n, \text{ where }x=\{x_n\}
+\end{equation}
+This is clearly a linear functional on $c$, furtheremore for $x\in c$, with $||x||_\infty \leq 1$ then we have:\begin{equation}
+    |\gamma(x)| = |\lim_{n\rightarrow \infty} x_n| = \lim_{n\rightarrow \infty}|x_n|\leq 1.
+\end{equation}
+Recall we can pull out the limit since $|\cdot|$ is a continuous function and since $|x_n|\leq 1$, for all $n$ we have that $\lim |x_n|\leq 1$.
+
+\
+
+Since the sequence $\{1,1,1\dots\}\in c$, we have $|\gamma(\{1,1,\dots\})| = \lim |1| = 1$. So $||\gamma|| = 1$.
+
+\
+
+Now by the Hahn-Banach Theorem, $\gamma$ can be extended to a bounded linear functional $\Gamma$ on $\ell^\infty$ such that $||\Gamma|| = ||\gamma||$.
+
+\
+
+Now notice that for all $x\in c_0$, we have $\Gamma(x) = \gamma(x) = \lim_{n\rightarrow \infty} x_n = 0$. So assume that there exists $y=\{y_n\}\in \ell^1$ such that:\begin{equation}
+    \Gamma(x) = \sum {x_i}{y_i} \text{ for all } x_i
+\end{equation}
+Then let $e^i\in c_0$, be the sequence such that ${e^i}_n = {\delta^i}_n = \begin{cases}1\text{ if }i=n\\ 0\text{otherwise}\end{cases}$. Now notice that:\begin{equation}
+    y_i = \Gamma(e^i) = 0 \text{ for all }i
+\end{equation}  
+So $y = 0$ and $\Gamma = 0$, but this is impossible since $||\Gamma|| = 1$ (recall that $\Gamma(\{1,1,1,\dots\}) = 1$).
+
+Therefore $\Gamma\in {(\ell^\infty)}^\ast$ but is not given by a $y\in \ell^1$.
+
+\item For all $k\geq 0$, let $T_k = \{(x_1,x_2,\dots,x_k,0,0,0,\dots)\mid x_i\in \C\}$ and let $T=\bigcup_{k\geq 1}T_k$, we will first show that $T$ is dense in $c_0$ and $\ell^1$,
+then we will find a countable set that whose closure contains $T$.
+
+\
+
+
+\
+
+\begin{itemize}
+    \item First of all it is clear that $T\subseteq c_0$.
+
+    Let $x = \{x_1,x_2,\dots\}\in c_0$, let $\epsilon>0$ and $N\geq 1$ be such that $|x_n|<\epsilon$, for all $n>N$. Now let: 
+    \begin{equation} x^N = \{x_1,x_2,\dots,x_N,0,0,\dots\}\in T\end{equation}  
+
+We have: \begin{equation}
+    ||x-x^N||_\infty = ||(0,\dots,0,x_{N+1},x_{N+2},\dots)||_\infty = \sup_{n>N}|x_n|\leq \epsilon
+\end{equation}
+So we can find a sequence $\{x^N\}\in T$ such that $x^N\rightarrow c_0$. So, $c_0\subseteq \overline{T}$ therefore we indeed see that $T$ is dense in $c_0$.
+
+    \item Once again it is clear that $T\subseteq \ell^1$.
+    
+    Now let $y=\{y_1,y_2,\dots\}\in \ell^1$, and let $\epsilon>0$, since $\{\sum_{i=1}^n |y_i|\}$ is a convergent sequence, it is a cauchy sequence. 
+
+    So let $N\geq 1$ be such that\begin{equation}
+        |\sum_{i=1}^N|y_i| - \sum_{i=1}^m |y_i|| = \sum_{i=N+1}^m|y_i|<\epsilon \text{ for all }m>N
+    \end{equation}
+Since this is true for all $m>N$, this means that if $y^N = \{y_1, y_2,\dots,y_N,0,0,\dots\}\in T$ we have:\begin{equation}
+    ||y-y^N||_1 = \sum_{i=1}^\infty |y_i-{y_i}^N| = \sum_{i=N+1}^\infty |y_i| = \sup_{m>N}\bigg(\sum_{i=N+1}^m|y_i|\bigg)<\epsilon
+\end{equation}
+
+So once again we indeed see that $T$ is dense in $\ell^1$.
+\end{itemize}
+
+Finally if for all $k$, let \begin{equation}S_k = \{(q_1+ip_1,\dots,q_k+ip_k,0,0,\dots) \mid p_n,q_n\in \Q\} \text{ and }S=\bigcup_{k\geq 1}S_k\end{equation}
+
+Then we see that $S$ is the countable union of countable sets, so it's countable, furthermore since $\Q[i]$ is dense in $\C$, we see that $T\subseteq \overline{S}$, so we see that $S$ is dense
+in $c_0$ and in $\ell^1$. So they are indeed seperable.
+
+\
+
+Now let $V = \{(x_1,x_2,\dots)\in \ell^\infty \mid x_i\in \{0,1\}\text{ for all }i\geq 1\}$. Note that for any $x,y\in V$ such that $x\neq y$, we have $x_i\neq y_i$ for some $i$, so WLOG we have $x_i = 1$ and $y_i = 0$, and so we have:\begin{equation}
+    ||x-y||_\infty = \sup_{n} |x_n-y_n| = 1
+\end{equation}
+So for all $x\in V$, we define $B(x,\frac{1}{2}) = \{z\in \ell^\infty \mid ||x-z||_\infty <\frac{1}{2}\}$. So $B(x,\frac{1}{2})\cap B(y,\frac{1}{2}) = \emptyset$, for all $x\neq y$.
+Now let $S$ be a dense subset of $\ell^\infty$, then notice that since $B(x,\frac{1}{2})$ is open we have that:\begin{equation}
+    S\cap B(x,\frac{1}{2}) \neq \emptyset, \text{ for all }x\in V\text{ say }v_x\in S\cap B(x,\frac{1}{2}) 
+\end{equation}
+Now notice that $v_x\neq v_y$ for all $x,y\in V$ such that $x\neq y$.
+
+So we notice that $\{v_x\mid x\in V\} \subseteq S$, but since we have an injection from $[0,1]$ to $V$, by $\sum_{i=1}^\infty 2^{x_i} \rightarrow \{x_i\}$, we see that $V$ is uncountable.
+Therefore, $\{v_x\mid x\in V\}$ is uncountable so $S$ is also. Since $S$ is an arbitrary dense set in $\ell^\infty$, we see that $\ell^\infty$ is not seperable.
+\end{enumerate}
+    \end{proof}
+
+    \textbf{Exercise 11. For }$0<\alpha\leq 1$\textbf{, let }Lip $\alpha$\textbf{ denote the space of all complex functions }$f$
+    \textbf{ on }$[a,b]$\textbf{ for which }\begin{equation*}
+        M_f = \sup_{s\neq t}\frac{|f(s)-f(t)|}{|s-t|^\alpha}<\infty
+    \end{equation*}
+    \begin{enumerate}[label = (\alph*)]
+        \item \textbf{Prove that }Lip $\alpha$ \textbf{ is a Banach space, if }$||f|| = |f(a)|+M_f$.
+        \item \textbf{Prove that }Lip $\alpha$ \textbf{ is a Banach space, if }$||f|| = M_f+\sup_x|f(x)|$.
+    \end{enumerate}
+\begin{proof}
+    Notice that for all $f,g\in \text{Lip }\alpha$, we have for all $s\neq t$:\begin{align*}
+        \frac{|(f(s)+g(s)) - (f(t)+g(t))|}{|s-t|^\alpha}\leq \frac{|f(s)-f(t)|}{|s-t|^\alpha}+\frac{|g(s)-g(t)|}{|s-t|^\alpha}\leq M_f+M_g 
+    \end{align*}
+    Therefore, $M_{f+g}\leq M_f+M_g$.
+
+    And for all $\omega\in \C$ we have:\begin{align*}
+        \sup_{s\neq t}\frac{|\omega f(s)-\omega f(t)|}{|s-t|^\alpha} = |\omega|\sup_{s\neq t}\frac{|f(s)-f(t)|}{|s-t|^\alpha} = |\omega|M_f
+    \end{align*}
+
+    Furthermore, let $f\in \text{Lip }\alpha$ and $\epsilon>0$, for all $s,t\in [a,b]$ with $s\neq t$, such that $|s-t|<\sqrt[\alpha]{\frac{\epsilon}{M_f}}$, we have:\begin{align*}
+     \frac{|f(s)-f(t)|}{|s-t|^\alpha}< M_f \Rightarrow |f(s)-f(t)|<M_f|s-t|^\alpha <\epsilon
+    \end{align*}
+
+    So all $f\in$ Lip $\alpha$ are uniformely continuous.
+
+    \begin{enumerate}[label = (\alph*)]
+        \item For all $f,g\in \text{Lip }\alpha$ and $\omega\in \C$:\begin{align*}
+            &||f+g|| = |f(a)+g(a)| + M_{f+g}\leq |f(a)| + |g(a)| + M_f+M_g = ||f||+||g||\\
+            &||\omega f|| = |\omega|\cdot|f(a)|+|\omega| M_f = |\omega|\cdot ||f||
+        \end{align*}
+        Si this is indeed a norm on Lip $\alpha$. Now Let $\{f_n\}$ be a Cauchy sequence in Lip $\alpha$.
+
+        So we let $\epsilon>0$ and $N\geq 1$ such that for $n\geq m\geq N$: \begin{equation*}
+            \sup_{s\neq t}\frac{|(f_n(s)-f_m(s))-(f_n(t)-f_m(t))|}{|s-t|^\alpha} = M_{f_n-f_m} \leq |f_n(a)+f_m(a)| + M_{f_n-f_m} = ||f_n-f_m|| <\epsilon
+        \end{equation*}
+
+        This means that for all $s\neq t$ we have: \begin{equation*}
+            |(f_n(s)-f_m(s))-(f_n(t)-f_m(t))|<\epsilon|s-t|^\alpha
+        \end{equation*}
+        \item For all $f,g\in \text{Lip }\alpha$ and $\omega\in \C$:\begin{align*}
+            &||f+g|| = \sup_x|f(x)+g(x)| + M_{f+g}\leq \sup_x|f(x)| + \sup_x|g(x)| + M_f+M_g = ||f||+||g||\\
+            &||\omega f|| = |\omega|\cdot\sup_x|f(x)|+|\omega| M_f = |\omega|\cdot ||f||
+        \end{align*}
+        Si this is indeed a norm on Lip $\alpha$. Now Let $\{f_n\}$ be a Cauchy sequence in Lip $\alpha$.
+Then note for every $\epsilon>0$, let $N\geq 1$ such that for all $m,n\geq N$ we have:\begin{equation}
+    \sup_x |f_n(x)-f_m(x)|\leq \sup_x|f_n(x)+f_m(x)| + M_{f_n+f_m} = ||f_n-f_m||<\epsilon
+\end{equation}
+
+Therefore for all $x\in [a,b]$ we have $|f_n(x)-f_m(x)|<\epsilon$, so $\{f_n(x)\}$ is a Cauchy sequence in $\C$.
+So we define $f\colon [a,b]\rightarrow \C$ such that \begin{equation}f(x) = \lim_{n\rightarrow \infty}f(x)\end{equation}
+    
+\textbf{Not done}
+
+\end{enumerate}
+\end{proof}
+\textbf{Exercise 13.}
+
+\begin{proof}
+    \begin{enumerate}[label = (\alph*)]
+        \item For all $n\in \N^\ast$, let:\begin{equation}
+            F_n\colon X\rightarrow \C, \text{ such that }F_n(x) = f_n(x)
+        \end{equation}   
+
+        Now note that since $\lim_{n\rightarrow\infty}f_n(x)$ exists for all $x\in X$, we have that $\{f_n(x)\}$ is a bounded sequence for all 
+        $x\in X$. Therefore:\begin{equation}
+            \sup_{n\in\N^\ast}|F_n(x)| = \sup_{n\in\N^\ast}|f_n(x)|<\infty \text{ for all }x 
+        \end{equation}
+        So by Banach-Steinhaus, there exists $M<\infty$ such that:\begin{equation}
+            \sup_{||x||\leq 1}|f_n(x)| = ||F_n||\leq M \text{ for all }n\in \N^\ast
+        \end{equation}
+        But if we let $V = \{x\in X\colon ||x||< 1\} = B(0,1)$, be the open unit ball. Then:\begin{equation}
+            |f_n(x)|\leq ||F_n||\leq M \text{ for all }x\in V, \ \& \ n=1,2,3,\dots
+        \end{equation}
+        \item Let $\epsilon>0$, and for $N=1,2,3,\dots$ let:\begin{equation}
+            A_N = \{x\in X \colon |f_m(x)-f_n(x)|\leq \epsilon, \text{ if }m\geq N \text{ and }n\geq N \}
+        \end{equation}
+First we claim that $A_N$ is closed for all $N$. This is indeed true let, $\{x_k\}$ be a sequence in $A_N$ such that $x_k\rightarrow x\in X$.
+Then since $f_n$ is continuous for all $n$ we see that:\begin{equation}
+    |f_m(x)-f_n(x)| = \lim_{k\rightarrow\infty}|f_m(x_k)-f_n(x_k)|\leq \epsilon, \text{ since } |f_m(x_k)-f_n(x_k)|\leq \epsilon\text{ for all }k
+\end{equation} 
+So $x\in A_N$, so $A_N$ is indeed closed.
+
+\
+
+
+Now let $x\in X$ be arbitrary, since $\{f_n(x)\}$ converges, there is some $N$ such that $x\in A_N$, by the definition of a Cauchy sequence.
+So we see that $X=\bigcup A_N$, since $X$ is complete by Baire's category theorem it is not of first category, so there is a $N$ 
+such that $\overline{A_N} = A_N$ has a nonempty interior.
+
+Let $V$ be a non-empty open set in  $A_N$. Then we have that:\begin{align*}
+    &|f_m(x)-f_n(x)|\leq \epsilon \text{ for all }x\in V, \text{ for all }m,n\geq N\\
+    \therefore \ &|f(x)-f_n(x)| = |\lim_{m\rightarrow\infty}f_m(x)-f_n(x)| = \lim_{m\rightarrow\infty}|f_m(x)-f_n(x)|\leq \epsilon  \text{ for all }x\in V, \text{ for all }n\geq N
+\end{align*}
+
+    \end{enumerate}
+\end{proof}
+    \end{document}
