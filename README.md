@@ -5,4 +5,4 @@ Notes and Solutions to "Real and Complex Analysis", by W. Rudin
 
 ---
 
-Lecture notes may look better with inverted colours. Older notes need to be reformated as the pdf files are too big.
+Lecture notes may look better with inverted colours. Notes will be reformatted as most of them are currently too big to upload.
