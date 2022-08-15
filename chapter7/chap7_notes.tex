@@ -1,0 +1,32 @@
+\input{../template.tex}
+\begin{document}
+    
+\section{Differentiation}
+
+\subsection{Derivatives of Measures}
+\begin{theorem}
+    Suppose $\mu$ is a complex Borel measure on $\R^1$ and \begin{equation}
+        f(x) = \mu((-\infty, x)) \text{ for }x\in \R^1
+    \end{equation}
+
+    If $x\in \R^1$ and $A$ is a complex number, TFAE\begin{enumerate}[label = (\alph*)]
+        \item $f$ is differentiable at $x$ and $f'(x) = A$.
+        \item For all $\epsilon>0$, there exists $\delta>0$ such that\begin{equation}
+            |\frac{\mu(I)}{m(I)}-A|<\epsilon
+        \end{equation}
+
+        for every open segment $I$ that contains $x$ and whose length is less than $\delta$. Note $m$ is the Lebesgue measure on $\R^1$.
+    \end{enumerate}
+
+    \begin{proof}
+        $(a)\Rightarrow (b)$ 
+        We will first show this for $A = 0$. 
+
+        \
+        
+        Since $f'(x) = A$, we have, for all $\epsilon>0$ there is a $\delta>0$ such that for $(t,x)$ with $|t-x|<\delta$:\begin{align*}
+            |\frac{f(t)-f(x)}{t-x} - f'(x)| &= |\frac{\mu([t,x))}{t-x} - A| = |\frac{\mu([t,x))}{m([t,x))} - A| <\epsilon
+        \end{align*}
+    \end{proof}
+\end{theorem}
+\end{document}

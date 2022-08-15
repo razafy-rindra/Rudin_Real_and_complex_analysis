@@ -1,0 +1,144 @@
+\input{../template.tex}
+
+\begin{document}
+    \begin{exercise}
+        Does there exists an infinite $\sigma$-algebra which has only countably many members?
+    \begin{proof}
+        
+    \end{proof}
+    \end{exercise}
+
+    \begin{exercise}
+        Prove the analogue of Theorem 1.8. for n functions.
+        
+        \begin{theorem}\textbf{1.8}
+            Let $u$ and $v$ be real measurable functions on a measurable space $X$, and $\Phi$ be a continuous mapping of the plane into a topological space $Y$, and define:\begin{equation*}
+                h(x) = \Phi(u(x),v(x))
+            \end{equation*}
+            for $x\in X$. Then $h\colon X\rightarrow Y$ is measurable.
+        \end{theorem}
+    \end{exercise}
+
+    \begin{exercise}
+        Prove that if $f$ is a real function on a measurable space $X$ such that $\{x\colon f(x)\geq r\}$ is a measurable for every rational $r$, then $f$ is measurable.
+    
+        \begin{proof}
+            Recall from theorem $1.12$, that if $f^{-1}((a,\infty])$ is measurable for every real $a$, then $f$ is measurable.
+
+            So let $a\in \R$ and $\{r_n\}$ be a sequence of rational funcitons such that $r_1<r_2<\cdots\leq a$ and $\lim_{n\rightarrow\infty} r_n = a$. \[A_n = \{x\colon f(x)\geq r_n\} \text{ is measurable for all } n\] So note that, if $x$ is such that $f(x)\geq a$ then $f(x)\geq r_n$ for all $n$. 
+            And if for all $n\in\N$ we have $r_n\leq f(x)$ then $a\leq f(x)$ since if $f(x)<a$, then there exists $m$ such that $f(x)<r_m<a$ since $r_n\rightarrow a$.
+        
+        So we see that \begin{equation}
+            f^{-1}((a,\infty]) = \{x\colon f(x)\geq a\} = \bigcap A_n
+        \end{equation}
+
+        Since each $A_n$ is measurable then $f^{-1}((a,\infty])$ is measurable. Since $a\in \R$ was chosen arbitrarly, this is true for all $a$, so $f$ is measurable.
+        \end{proof}
+    \end{exercise}
+
+    \begin{exercise}
+        Let $\{a_n\}$ and $\{b_n\}$ be sequence in $[-\infty,\infty]$ and prove the following assertions:\begin{enumerate}[label = (\alph*)]
+            \item \[\limsup_{n\rightarrow\infty}(-a_n) = -\liminf_{n\rightarrow\infty}a_n\]
+            \item \[\limsup_{n\rightarrow\infty}(a_n+b_n) \leq \limsup_{n\rightarrow \infty}a_n + \limsup_{n\rightarrow\infty}b_n\] Provide none of the sums are of the form $\infty-\infty$. Also show by an example that a strict inequality can hold.
+            \item If $a_n\leq b_n$ for all $n$ then:\[\liminf_{n\rightarrow\infty}a_n\leq \liminf_{n\rightarrow\infty}b_n\]
+        \end{enumerate}
+
+        \begin{proof}
+            \begin{enumerate}[label = (\alph*)]
+                \item Note that for all $k$, let $b_k = \sup\{-a_k, -a+_{k+1},-a_{k+2},\ldots\}$, for all $n\geq k$: \begin{align*}
+                    -a_n\leq b_k \Rightarrow -b_k\leq a_n \Rightarrow -b_k = \text{inf }\{a_k,a_{k+1},\ldots\}
+                \end{align*}
+
+                Now notice that \begin{align*}
+                   -\limsup_{n\rightarrow\infty}(-a_n)   &=-\inf\{b_1,b_2,\ldots\}\\
+                      &= \sup\{-b_1,-b_2,\ldots\}\\
+                      &= \liminf_{n\rightarrow \infty}(a_n)
+                \end{align*}
+
+                \item We assume that for none of the $k$ we have $a_k+b_k$ is of the form $\infty-\infty$ and likewise we assume that $\limsup a_n + \limsup b_n$ is not of that form.
+                
+                In this case all of the sums are well defined. 
+                
+                Let $k\in \N^\ast$, we let $A_k = \sup\{a_k,a_{k+1},\ldots\}$ and $B_k = \sup\{b_k,b_{k+1},\ldots\}$, and $C_k = \sup\{a_k+b_k, a_{k+1}+b_{k+1},\ldots\}$. So for all $k$ and $m,l\leq k\leq n$:\begin{equation*}
+                    a_n+b_n \leq A_k+B_k\leq A_m+B_l
+                \end{equation*}
+
+                So \begin{equation*}
+                    C_k\leq A_m+B_l \text{ for all }m,l\leq k
+                \end{equation*}
+
+                Therefore for all $m,l$ we have:\[
+                    \limsup_{n\rightarrow \infty}(a_n+b_n) = \inf\{C_1,C_2,\ldots\} \leq A_m + B_l    
+                \]
+
+                Indeed this is true since for all $m,l\in \N^\ast$ there is a $k\geq m.l$ so there is a $C_k\leq A_m+B_l$.
+
+                \
+
+                Now we will fix $l$, notice that since $\limsup_{n\rightarrow \infty}(a_n+b_n) \leq A_m + B_l$, for all $m$, So $\limsup_{n\rightarrow \infty}(a_n+b_n)$ is a lower bound for $\{A_1+B_l,A_2+B_l,\ldots\}$, therefore:\begin{equation*}
+                    \limsup_{n\rightarrow \infty}(a_n+b_n) \leq \inf\{A_1+B_l,A_2+B_l,\ldots\} = \inf\{A_1,A_2,\ldots\} + B_l = \limsup_{n\rightarrow \infty}(a_n)+B_l \tag{$\dagger$}
+                \end{equation*}
+
+                So $(\dagger)$ is true for all $l\in \N^\ast$, so similarly we see that  \[
+                \limsup_{n\rightarrow \infty}(a_n+b_n) \leq \limsup_{n\rightarrow \infty}(a_n)+\limsup_{n\rightarrow \infty}(b_n)
+               \]
+
+                \
+
+                Now let $a_n = \cos^2(\frac{n\pi}{2})$ and $a_n = \sin^2(\frac{n\pi}{2})$. On the one hand we have:\[a_n+b_n =\cos^2(\frac{n\pi}{2}) + \sin^2(\frac{n\pi}{2}) = 1\text{ for all }n \]
+
+                So it is clear that $\limsup_{n\rightarrow \infty}(a_n+b_n) = \limsup_{n\rightarrow \infty}(1) = 1$.
+
+                On the other hand we know that \[a_n = \cos^2(\frac{n\pi}{2}) = \begin{cases}
+                    1 \text{ if }n = 0\pmod 2\\
+                    0 \text{ if }n = 1\pmod 2
+                \end{cases}\text{ and }b_n = \sin^2(\frac{n\pi}{2}) = \begin{cases}
+                    0 \text{ if }n = 0\pmod 2\\
+                    1 \text{ if }n = 1\pmod 2
+                \end{cases}\]
+
+                So it is easy to see that $\limsup a_n = 1 = \limsup b_n$. Therefore:\begin{equation*}
+                    \limsup (a_n+b_n) = 1 < 2 = \limsup(a_n) + \limsup(b_n)
+                \end{equation*}
+               \item For all $k$ let $A_k = \inf\{a_k,a_{k+1},\ldots\}$ and $B_k = \inf\{b_k,b_{k+1},\ldots\}$. We have:\begin{equation*}
+                    A_k\leq a_n\leq b_n \text{ for all }n\geq k
+               \end{equation*}
+               So $A_k$ is a lower bound of $\{b_k,b_{k+1},\ldots\}$, so \[A_k\leq B_k \text{ for all }k\]
+
+               Now for all $n$ we have:\begin{equation*}
+                    A_n\leq B_n\leq \sup\{B_1,B_2,\ldots\} = \liminf (b_n) 
+               \end{equation*}
+
+               So $\liminf(b_n)$ is an upper bound for $\{A_1,A_2,\ldots\}$  so:\[\liminf(a_n) = \sup\{A_1,A_2,\ldots\}\leq \liminf(b_n) \] 
+            \end{enumerate}
+        \end{proof}
+    \end{exercise}
+
+    \begin{exercise}
+        \begin{enumerate}[label = (\alph*)]
+            \item Suppose $f\colon X\rightarrow [-\infty,\infty]$ and $g\colon X\rightarrow [-\infty, \infty]$ are measurable. Prove that the sets:\[
+                \{x\colon f(x)<g(x)\}, \{x\colon f(x) = g(x)\}    
+            \] are measurable.
+            \item Prove that the set at which a sequence of measurable real-valued functions converges (to a finite limit) is measurable.
+        \end{enumerate}
+        \begin{enumerate}[label = (\alph*)]
+            \item If $x$ is such that $f(x)<g(x)$, then there exists a $r$ such that $f(x)<r<g(x)$, furthermore we can assume that $r\in \Q$. So for all $r\in \Q$ let us define:\begin{equation*}
+                A_r = \{x\colon f(x)<r\} \text{ and } B_r = \{x\colon r<g(x)\}
+            \end{equation*}
+            These sets are measurable since $f,g$ are measurable.
+
+            Now notice that if $x\in A_r\cap B_r$, then we have $f(x)<r<g(x)$, so we are almost done! Let us just define:\begin{equation*}
+                M = \bigcup_{r\in \Q}(A_r\cap B_r)
+            \end{equation*}
+
+            This is a measurable set since it is a countable union of measurable sets. And for all $x\in M$, there is a $r\in \Q$ such that $x\in A_r\cap B_r \Rightarrow f(x)<r<g(x)$. Conversely for any $x\in X$ such that $f(x)<g(x)$, there is a $r\in \Q$ such that $f(x)<r<g(x)$ so $x\in M$.
+
+            So we indeed see that \[M = \{x\colon f(x)<g(x)\}\] is measurable.
+
+            \
+
+            
+            \item Prove that the set at which a sequence of measurable real-valued functions converges (to a finite limit) is measurable.
+        \end{enumerate}
+    \end{exercise}
+\end{document} 
