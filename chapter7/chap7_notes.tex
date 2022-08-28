@@ -1,8 +1,12 @@
 \input{../template.tex}
 \begin{document}
     
+\begin{theindex}
+    \item Derivatives of Measures
+    \subitem symmetric derivative\ref{sym-der}
+    \subitem maximal function\ref{max-fun}
+\end{theindex}
 \section{Differentiation}
-
 \subsection{Derivatives of Measures}
 \begin{theorem}
     Suppose $\mu$ is a complex Borel measure on $\R^1$ and \begin{equation}
@@ -19,14 +23,44 @@
     \end{enumerate}
 
     \begin{proof}
-        $(a)\Rightarrow (b)$ 
-        We will first show this for $A = 0$. 
-
-        \
-        
+        $(a)\Rightarrow (b)$         
         Since $f'(x) = A$, we have, for all $\epsilon>0$ there is a $\delta>0$ such that for $(t,x)$ with $|t-x|<\delta$:\begin{align*}
-            |\frac{f(t)-f(x)}{t-x} - f'(x)| &= |\frac{\mu([t,x))}{t-x} - A| = |\frac{\mu([t,x))}{m([t,x))} - A| <\epsilon
+            |\frac{f(t)-f(x)}{t-x} - f'(x)| &= |\frac{\mu([t,x))}{t-x} - A| = |\frac{\mu([t,x))}{m([t,x))} - A| <\epsilon \tag{$\dagger$}
         \end{align*}
+
+        So for $I = (a,b)$ is any open interval containg $x$, of length less than $\delta$. Now let $\{t_n\}$ be such that $a<\ldots<t_n<t_{n-1}<\ldots < t_1$.
     \end{proof}
 \end{theorem}
+
+\begin{definition}
+    Let us fix a dimension $k$, denote the open ball with center $x\in \R^k$ and radius $r>0$ by \[B(x,r) = \{y\in \R^k \colon |y-x|<r\}\]
+    We associate to any Borel measure $\mu$ on $\R^k$ the quotients:\[({Q_r}\mu)(x) = \frac{\mu(B(x,r))}{m(B(x,r))}\]
+    Where $m$ is the Lebesgue measure on $R^k$.
+
+    \
+
+    We define the \textbf{symmetric derivative}\label{sym-der} to be \[(D\mu)(x) = \lim_{r\rightarrow 0}({Q_r}\mu)(x)\]
+\end{definition}
+
+\begin{definition}
+    Using the same notation as above we define the \textbf{maximal function}\label{max-fun} $M\mu$, for $\mu\geq 0$, to be defined by \[(M\mu)(x) = \sup_{0<r<\infty}(Q_r\mu)(x)\]
+\begin{remark}
+    The maximal function of a complex Borel measure $\mu$ is, by definition, its total variation $|\mu|$.
+\end{remark}
+\end{definition}
+\begin{proposition}
+    The functions $M\mu\colon R^k\rightarrow [0,\infty]$ are lower semicontinuous, hence measurable.
+    \begin{proof}
+        Assume $\mu\geq 0$, and let $\lambda>0$ and $E = \{M\mu > \lambda\}$. Fix $x\in E$. Then there is an $r>0$ such that:\[\mu(B(x,r)) = tm(B(x,r)) \text{ for some }t>\lambda\]
+
+        Indeed since $\sup_{0<r<\infty}\frac{\mu(B(x,r))}{m(B(x,r))} >\lambda$. So for some $r$, we have $\frac{\mu(B(x,r))}{m(B(x,r))} >\lambda$. Letting $t = \frac{\mu(B(x,r))}{m(B(x,r))}$ gives us the desired result. 
+   
+        Furthermore there is a $\delta>0$ such that:\[(r+\delta)^k<\frac{{r^k}t}{\lambda}\]
+    If $|y-x|<\delta$, then $B(y,r+\delta) \supseteq B(x,r)$. Therefore
+    \[
+        \mu(B(y,r+\delta)) \geq \mu(B(x,r)) = tm(B(x,r)) = t[\frac{r}{{(r+\delta)}^k}m(B(y,r+\delta)) > \lambda m(B(y,r+\delta))]   
+    \]
+    Thus $B(x,\delta)\subseteq E$. So $E$ is open.
+    \end{proof}
+\end{proposition}
 \end{document}
