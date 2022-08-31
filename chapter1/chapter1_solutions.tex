@@ -121,24 +121,31 @@
             \] are measurable.
             \item Prove that the set at which a sequence of measurable real-valued functions converges (to a finite limit) is measurable.
         \end{enumerate}
-        \begin{enumerate}[label = (\alph*)]
-            \item If $x$ is such that $f(x)<g(x)$, then there exists a $r$ such that $f(x)<r<g(x)$, furthermore we can assume that $r\in \Q$. So for all $r\in \Q$ let us define:\begin{equation*}
-                A_r = \{x\colon f(x)<r\} \text{ and } B_r = \{x\colon r<g(x)\}
-            \end{equation*}
-            These sets are measurable since $f,g$ are measurable.
+\begin{proof}
+    \begin{enumerate}[label = (\alph*)]
+        \item If $x$ is such that $f(x)<g(x)$, then there exists a $r$ such that $f(x)<r<g(x)$, furthermore we can assume that $r\in \Q$. So for all $r\in \Q$ let us define:\begin{equation*}
+            A_r = \{x\colon f(x)<r\} \text{ and } B_r = \{x\colon r<g(x)\}
+        \end{equation*}
+        These sets are measurable since $f,g$ are measurable.
 
-            Now notice that if $x\in A_r\cap B_r$, then we have $f(x)<r<g(x)$, so we are almost done! Let us just define:\begin{equation*}
-                M = \bigcup_{r\in \Q}(A_r\cap B_r)
-            \end{equation*}
+        Now notice that if $x\in A_r\cap B_r$, then we have $f(x)<r<g(x)$, so we are almost done! Let us just define:\begin{equation*}
+            M = \bigcup_{r\in \Q}(A_r\cap B_r)
+        \end{equation*}
 
-            This is a measurable set since it is a countable union of measurable sets. And for all $x\in M$, there is a $r\in \Q$ such that $x\in A_r\cap B_r \Rightarrow f(x)<r<g(x)$. Conversely for any $x\in X$ such that $f(x)<g(x)$, there is a $r\in \Q$ such that $f(x)<r<g(x)$ so $x\in M$.
+        This is a measurable set since it is a countable union of measurable sets. And for all $x\in M$, there is a $r\in \Q$ such that $x\in A_r\cap B_r \Rightarrow f(x)<r<g(x)$. Conversely for any $x\in X$ such that $f(x)<g(x)$, there is a $r\in \Q$ such that $f(x)<r<g(x)$ so $x\in M$.
 
-            So we indeed see that \[M = \{x\colon f(x)<g(x)\}\] is measurable.
+        So we indeed see that \[M = \{x\colon f(x)<g(x)\}\] is measurable.
 
-            \
+        \
 
-            
-            \item Prove that the set at which a sequence of measurable real-valued functions converges (to a finite limit) is measurable.
-        \end{enumerate}
+        Now notice this tells us that $S = \{x\colon g(x)<f(x)\}$ and $T = \{x\colon f(x)<g(x)\}$ are measurable. Therefore:\begin{align*}
+            S^c &= \{x\colon f(x)\leq g(x)\}\\
+            T^c &= \{x\colon g(x)\leq f(x)\}
+        \end{align*}
+        Are both measurable, so the set:\[\{x\colon f(x) = g(x)\} = S^c\cap T^c = \{x\colon f(x)\leq g(x)\}\cap\{x\colon g(x)\leq f(x)\}\] Is also measurable.
+    
+        \item Let $\{f_n\}$ be a sequence of measurable real-valued functions. Let $A = \{x\colon \lim_{n\rightarrow \infty}f_n(x)<\infty\}$
+    \end{enumerate}
+\end{proof}
     \end{exercise}
 \end{document} 

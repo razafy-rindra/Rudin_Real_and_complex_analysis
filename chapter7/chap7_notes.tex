@@ -1,11 +1,13 @@
 \input{../template.tex}
+\usepackage{makeidx}
+\makeindex
+
 \begin{document}
-    
-\begin{theindex}
-    \item Derivatives of Measures
-    \subitem symmetric derivative\ref{sym-der}
-    \subitem maximal function\ref{max-fun}
-\end{theindex}
+%\begin{theindex}
+ %   \item Derivatives of Measures
+  %  \subitem symmetric derivative~\ref{sym-der}
+   % \subitem maximal function\ref{max-fun}
+%\end{theindex}
 \section{Differentiation}
 \subsection{Derivatives of Measures}
 \begin{theorem}
@@ -39,11 +41,11 @@
 
     \
 
-    We define the \textbf{symmetric derivative}\label{sym-der} to be \[(D\mu)(x) = \lim_{r\rightarrow 0}({Q_r}\mu)(x)\]
+    We define the \textbf{symmetric derivative}\index{symmetric derivative} to be \[(D\mu)(x) = \lim_{r\rightarrow 0}({Q_r}\mu)(x)\]
 \end{definition}
 
 \begin{definition}
-    Using the same notation as above we define the \textbf{maximal function}\label{max-fun} $M\mu$, for $\mu\geq 0$, to be defined by \[(M\mu)(x) = \sup_{0<r<\infty}(Q_r\mu)(x)\]
+    Using the same notation as above we define the \textbf{maximal function}\index{maximal function} $M\mu$, for $\mu\geq 0$, to be defined by \[(M\mu)(x) = \sup_{0<r<\infty}(Q_r\mu)(x)\]
 \begin{remark}
     The maximal function of a complex Borel measure $\mu$ is, by definition, its total variation $|\mu|$.
 \end{remark}
@@ -63,4 +65,78 @@
     Thus $B(x,\delta)\subseteq E$. So $E$ is open.
     \end{proof}
 \end{proposition}
+
+\begin{lemma}\label{7.3}
+    If $W$ is the union of a finite collection of balls $B(x_i,r_i)$, with $i\leq i \leq N$. Then there is a set $S\subseteq \{1,\ldots,N\}$ so that:\begin{enumerate}[label = (\alph*)]
+        \item the balls $B(x_i,r_i)$ with $i\in S$ are disjoint,
+        \item \[W\subseteq \bigcup_{i\in S}B(x_i,3r_i),\]
+        \item \[m(W)\leq 3^k\sum_{i\in S}m(B(x_i,r)i).\]
+    \end{enumerate}
+
+    \begin{proof}
+        Order the balls $B_i = B(x_i,r_i)$ such that $r_1\geq r_2\geq \cdots \geq r_N$. Put $i_1 = 1$, discard all the $B_j$ that intersect with $B_{i_1}$. Let $B_{i_2}$ the first of our remaining balls, and discard all $B_j$ with $j>i_2$ that intersect $B_{i_2}$, and let $B_{i_3}$ be the first of the remaining ones, etc\dots
+
+        This process stops after a finite number of steps, since we only have a finite collection of balls, and we let $S = \{i_1,i_2,\ldots\}$.
+    $(a)$ holds by definition and $(c)$ follows from $(b)$ since $m(B(x_i,3r_i)) = {3^k}m(B(x_i,r_i))$.
+
+    So we just need to show $(b)$. But notice for every discarded $B_j$, $B_j\cap B_i\neq \emptyset$ for some $i\in S$, where $r_i>r_j$. Assume that $X\in B_j\cap B_i$. We see that for all $x\in B_j$ we have:\begin{align*}
+        |x-x_i| &\leq |x-X| + |X-x_i|\\
+                &\leq |x-x_j| + |x_j-X| + |X-x_i|\\
+                &< r_j + r_j + r_i \text{ since }x,X\in B_j\text{ and }X\in B_i\\
+                &< 3r_i \text{ since }r_j\leq r_i
+    \end{align*}
+    So we see that $B_j\subseteq B(x_i,3r_i)$. This gives us $(b)$.
+    \end{proof}
+\end{lemma}
+
+\paragraph*{The maximal theorem}\begin{theorem}\label{maximal}
+    If $\mu$ is a complex Borel measure on $\R^k$ and $\lambda$ is a positive number, then\[m\{M\mu > \lambda\}\leq 3^k\lambda^{-1}||\mu|| \tag{i} \]
+    Here $||\mu|| = |\mu|(\R^k)$ and $m\{M\mu > \lambda\}$ is an abbreviation of $m(\{x\in \R^k\colon (M\mu)(x) > \lambda\})$
+\begin{proof}
+    Fix $\mu$ and $\lambda$. Let $K$ be a compact subset of the open set $\{M\mu >\lambda\}$. Each $x\in K$ is the center of an open ball $B$ for which 
+    \[|\mu|(B)>\lambda m(B)\]
+
+    Some finite collection of these $B$'s covers $K$ and Lemma~\ref{7.3} tells us there is a disjoint subcollection $\{B_1,\ldots,B_n\}$ such that:\begin{equation*}
+        m(K)\leq 3^k\sum_{1}^n m(B_i)\leq 3^k\lambda^{-1}\sum_{1}^n|\mu|(B_i) \leq 3^l\lambda^{-1}||\mu||
+    \end{equation*}
+    The disjointess of the $B_i$'s was used in the last inequality. So (i) follows by taking the supremum over all compact $K\subseteq \{M\mu > \lambda\}$.
+\end{proof}
+\end{theorem}
+\paragraph*{Weak $L^1$}
+If $f\in L^1(\R^k)$ and $\lambda >0$, then \[m\{|f|>\lambda\}\leq \lambda^{-1}||f||_1\]
+because, if we let $E = \{|f|>\lambda\}$, we have:\begin{equation*}
+    \lambda m(E)\leq \int_R |f|dm\leq \int_{\R^k}|f| dm = ||f||_1
+\end{equation*}
+\begin{definition}
+    Any measurable function $f$ for which:\[\lambda m\{|f|>\lambda\}\]
+    is a bounnded funtion of $\lambda$ on $(0,\infty)$ is said to belong to \textbf{weak}\index{weak} $L^1$\index{weak $L^1$}
+ \end{definition}
+So from above we see that the weak $L^1$ contains $L^1$. But it is also larger since for example if we let $f = \frac{1}{x}$ on $(0,1)$, then for any $\lambda>0$, we have
+\[
+    \frac{1}{x}>\lambda\iff x<\frac{1}{\lambda}    
+\]
+
+So we have $\lambda\cdot m\{|f|>\lambda\} \leq \lambda\cdot m(0,\frac{1}{\lambda}) = 1<\infty$. So $\frac{1}{x}$ is weak $L^1$.
+\begin{definition}
+    We associate to each $f\in L^1(\R^k)$ its \textbf{maximal function}\index{maximal function} $Mf\colon \R^k\rightarrow [0,\infty]$ by setting\begin{equation*}
+        (Mf)(x) = \sup_{0<r<\infty}\frac{1}{m(B_r)}\int_{B(x,r)}|f|~dm
+    \end{equation*}
+\end{definition}
+If we identify $f$ with the measure $\mu$ given by $d\mu = f~dm$, we see that this defintion agrees with the previously defined $M\mu$. So theorem~\ref{maximal} states that the ``maximal operator'' $M$ sends $L^1$ to weak $L^1$, witha bound (namely $3^k$)
+that depends only on the space $\R^k$, i.e: For every $f\in L^1(\R^k)$ and every $\lambda>0$\begin{equation*}
+    m\{Mf>\lambda\} \leq 3^k\lambda^{-1}||f||_1
+\end{equation*}
+
+\paragraph*{Lebesgue points} 
+\begin{definition}
+    If $f\in L^1(\R^k)$, any $x\in \R^k$ for which it is true that\[\lim_{r\rightarrow 0}\frac{1}{m(B_r)}\int_{B(x,r)} |f(y)-f(x)|~dm(y) = 0\]
+    is called a \textbf{Lebesgue point}\index{Lebesgue point} of $f$.
+\end{definition}
+For example this equation holds if $f$ is continuous at the point $x$. More generally this equation holds, if the averages of $|f-f(x)|$ are not too small on the balls centered at $x$, i.e. The Lebesgue points of $f$ are thepoints where $f$ doesn't oscillate too much.
+
+\begin{theorem}
+    If $f\in L^1(R^k)$, then almost every $x\in \R^k$ is a Lebesgue point of $f$.
+\end{theorem}
+
+\printindex
 \end{document}
