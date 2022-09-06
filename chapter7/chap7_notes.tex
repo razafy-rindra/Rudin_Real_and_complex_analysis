@@ -256,5 +256,117 @@ For example this equation holds if $f$ is continuous at the point $x$. More gene
     \end{proof}
 \end{corollary}
 
+We now look at differentiation of measures that are singular wrt $m$.
+\begin{theorem}\label{singular}
+    Associate to each $x\in \R^k$ a sequence $\{E_i(x)\}$ that shrinks to $x$ nicely. If $\mu$ is a complex Borel measure and $\mu \perp m$, then\[
+        \lim_{i\rightarrow \infty}\frac{\mu(E_i(x))}{m(E_i(x))} = 0 \text{ a.e. }[m]    
+    \]
+
+    \begin{proof}
+        By the Jordan decomp theorem we just need to show that this is true with $\mu\geq 0$. In that case as we have seen in previous theorems:\[
+            \frac{\alpha(x)\mu(E_i(x))}{m(E_i(x))} \leq \frac{\mu(E_i(x))}{m(B(x,r_i))} \leq \frac{\mu(B(x,r_i))}{m(B(x,r_i))} 
+        \] 
+
+        So if we can show that $(D\mu)(x) = 0$ a.e. [m], we will prove the result by taking limits in the above inequality.
+
+        \
+
+        The upper derivative $\bar{D}\mu$ is defined by:\[
+            (\bar{D}\mu)(x) = \lim_{n\rightarrow \infty}\bigg[\sup_{0<r<1/n}(Q_r\mu)(x)\bigg] \text{ for }x\in \R^k
+        \]
+        Is a Borel function. 
+
+        \
+
+        Choose $\lambda>0$ and $\epsilon>0$. Since $\mu \perp m$, $\mu$ is concentrated on a set of Lebesgue measure $0$. The regularity of $\mu$ shows that there is a compact set $K$m with $m(K) = 0$, and $\mu(K)>||\mu||-\epsilon$.
+
+        Define $\mu_1(E) = \mu(K\cap E)$, for any Borel set $E\subseteq \R^k$, and put $\mu_2 = \mu-\mu_1$. Then $||\mu_2||<\epsilon$, and for every $x$ outside $K$,\[
+            (\bar{D}(\mu))(x) = (\bar{D}(\mu_2))(x) \leq (M\mu_2)(x).    
+        \]
+        Hence \[
+            \{\bar{D}\mu>\lambda\}\subseteq K\cup \{M\mu_2>\lambda\},    
+        \]
+        And \[
+            m\{\bar{D}\mu>\lambda\} \leq 3^k\lambda^{-1}||\mu_2||<3^k\lambda^{-1}\epsilon    
+        \]
+
+        Since this holds for all $\epsilon>0$ and $\lambda>0$, we find that $\bar{D}\mu = 0$ a.e. [m], so \[(D\mu)(x) = 0 \ a.e.[m]\]
+        Which gives us our result.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    Suppose that to each $x\in \R^k$ is associated to some sequence $\{E_i(x)\}$ that shrinks to $x$ nicely, and that $\mu$ is a complex Borel measure on $\R^k$.
+   Let $d\mu = f~dm+d\mu_s$ be the Lebesgue decomposition of $\mu$ wrt $m$. Then\[
+        \lim_{i\rightarrow \infty}\frac{\mu(E_i(x))}{m(E_i(x))} = f(x) \ a.e. [m] 
+   \]
+   In particular, $\mu\perp m$ if and only if $(D\mu)(x) = 0$ a.e. [m]
+    \begin{proof}
+        Let $\mu_a(E) = \int_E f~dm$, then recall that $\mu = \mu_a+\mu_s$, and \[\begin{cases}
+            \mu_a\ll m\\
+            \mu_s\perp m
+        \end{cases}\]
+
+        Then from theorem~\ref{derivative}
+        \[
+            \lim_{i\rightarrow \infty} \frac{\mu_a(E_i(x))}{m(E_i(x))} = f(x) \ a.e. [m]
+        \]
+
+        On the other hand from theorem~\ref{singular}
+        \[
+            \lim_{i\rightarrow \infty} \frac{\mu_s(E_i(x))}{m(E_i(x))} = 0 \ a.e. [m]
+        \]
+
+        So we have\[
+            \lim_{i\rightarrow \infty}\frac{\mu(E_i(x))}{m(E_i(x))} = \lim_{i\rightarrow \infty}\frac{\mu_a(E_i(x))+\mu_s(E_i(x))}{m(E_i(x))} = \lim_{i\rightarrow \infty} \frac{\mu_a(E_i(x))}{m(E_i(x))} + \lim_{i\rightarrow \infty} \frac{\mu_s(E_i(x))}{m(E_i(x))} = f(x) \ a.e. [m]      
+        \]
+
+        (Indeed if we let $A,B$ be the sets where the first two equations fail, then our result fails on $A\cup B$, which is the union of two measure zero sets, and so is a measure zero set, so this equality is true almost everywhere).
+    \end{proof}
+\end{corollary}
+
+\begin{theorem}
+    If $\mu$ is a positive Borel measure on $\R^k$ and $\mu\perp m$, then\[
+        (D\mu)(x) = \infty \ a.e. [\mu]    \tag{$\dagger$}
+    \]
+
+    \begin{proof}
+        There is a Borel set $S\subseteq \R^k$ with $m(S) = 0$ and $\mu(\R^k\setminus S) = 0$, and there are open sets $V_j\supseteq S$ with $m(V_j)<\frac{1}{j}$, for $j=1,2,3,\ldots$
+
+        For $N=1,2,3,\ldots$, let $E_N$ be the set of all $x\in S$ to which correspond radii $r_i = r_i(x)$, with $\lim r_i = 0$ such that \[
+            \mu(B(x,r_i)) <  Nm(B(x,r_i)).  \tag{$\dagger\dagger$}
+        \]
+        Then $(\dagger)$ holds for all $s\in S\setminus \bigcup_N E_N$.
+
+        \
+
+        Fix $N$ and $j$, for the moment. Every $x\in E_N$ is in the center of a ball $B_x\subseteq V_j$, that satisfies ($\dagger\dagger$). Let $\beta_x$ be the open ball with center $x$ whose radius is $\frac{1}{3}$ of that of $B_x$. The union of the $\beta_x$ is an open set $W_{j,N}$ such that $E_N\subseteq W_{j,N}\subseteq V_j$
+ 
+        \
+
+        Let $K\subseteq W_{j,N}$ be compact. Finitely many $\beta_x$ cover $K$. Lemma~\ref*{7.3} shows that there is a finite set $F\subseteq E_N$ such that:\begin{enumerate}[label = (\alph*)]
+            \item $\{\beta_x\colon x\in F\}$ is a disjoint collection, and
+            \item $K\subseteq \bigcup_{x\in F} B_x$
+        \end{enumerate}
+
+        Therefore \begin{align*}
+            \mu(K) &\leq \sum_{x\in F}\mu(B_x)\\
+                   &< N\sum_{x\in F} m(B_x)\\
+                   &= 3^k N\sum_{x\in F}m(\beta_x)\\
+                   &\leq 3^k Nm(V_j)\\
+                   &<3^k N/j
+        \end{align*}
+        This is true for any compact subset of $W_{j,N}$, since $W_{j,N}$ is open furthermore $\mu$ is a positive Borel measure on $\R^k$, so it is regular, therefore we have:
+        
+        \[
+            \mu(W_{j,N}) = \sup\{\mu(K) \colon K\subseteq W_{j,N}\text{ is compact }\} < 3^k N/j   
+        \]
+
+        Now let $\Omega_N = \bigcap_j W_{j,N}$, then $E_N\subseteq \Omega_N$, and $\Omega_N$ is a $G_\delta$ (so is measurable), and $\mu(\Omega_N) = 0$, and so:\[(D\mu)(x) = \infty \text{ for all }x\in S\setminus\bigcup_N\Omega_N\]
+        
+        Since $\bigcup_N\Omega_N$ is a set of measure zero, we have the desired result.
+    \end{proof}
+\end{theorem}
+
 \printindex
 \end{document}
