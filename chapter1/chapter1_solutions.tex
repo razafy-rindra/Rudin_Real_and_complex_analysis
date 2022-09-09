@@ -4,7 +4,15 @@
     \begin{exercise}
         Does there exists an infinite $\sigma$-algebra which has only countably many members?
     \begin{proof}
-        
+        Assume that $\mathcal{M}$ is an infinite $\sigma$-algebra with countably many members in a set $X$. So let $\mathcal{M} = \{A_0,A_1,A_2,\ldots\}$ where $A_0 = \emptyset$.
+
+        For all $x\in X$, we define:\[
+            B_x \coloneqq \bigcap_{x\in A_i} A_i
+        \] 
+        We claim that the $B_x$ for a partition for $X$\begin{itemize}
+            \item It is clear that $\bigcup_{x\in X} B_x = X$, since for all $x\in X\Rightarrow x\in B_x$. This also tells us that $B_x \neq \emptyset$, for all $x$.
+            \item Assume that $B_x\cap B_y\neq \emptyset$. So let $z\in B_x\cap B_y$. Then let 
+        \end{itemize}
     \end{proof}
     \end{exercise}
 
@@ -147,5 +155,28 @@
         \item Let $\{f_n\}$ be a sequence of measurable real-valued functions. Let $A = \{x\colon \lim_{n\rightarrow \infty}f_n(x)<\infty\}$
     \end{enumerate}
 \end{proof}
+    \end{exercise}
+
+    \begin{exercise}
+        Let $X$ be an uncountable set, let $\mathcal{M}$ be the collection of all sets $E\subseteq X$, such that $E$ or $E^c$ is at most countable. We define \[\mu(E) = \begin{cases}
+            0 \text{ if }E \text{ is at most countable}\\
+            1 \text{ if }E^c\text{ is at most countable}
+        \end{cases}\]
+        Prove that $\mathcal{M}$ is a $\sigma$-algebra in $X$ and that $\mu$ is a measure on $\mathcal{M}$. Describe the corresponding measurable functions and their integrals.
+
+        \begin{proof}
+
+            \
+
+            \begin{center}
+                First we will show that $\mathcal{M}$ is a $\sigma$-algebra
+            \end{center}
+            We will verify the three conditions:
+            \begin{itemize}
+                \item Since $X^c = \emptyset$ is countable we have $X\in \mathcal{M}$
+                \item Assume that $A\in \mathcal{M}$, then either $A = {(A^c)}^c$ is at most countable or $A^c$ is at most countable so $A^c\in \mathcal{M}$.
+                \item  
+            \end{itemize}
+        \end{proof}
     \end{exercise}
 \end{document} 
