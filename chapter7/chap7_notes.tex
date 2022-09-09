@@ -368,5 +368,94 @@ We now look at differentiation of measures that are singular wrt $m$.
     \end{proof}
 \end{theorem}
 
+\subsection{The Fundamental Theorem of Calculus}
+\paragraph*{Problems with the FTC when extending to the Lebesgue integral}
+\begin{enumerate}[label = (\alph*)]
+    \item Let \[
+        f(x) = \begin{cases}
+            x^2\sin(x^{-2}) \text{ if }x\neq 0\\
+            0 \text{ otherwise}
+        \end{cases}    
+    \]
+    Then $f$ is differentiable at every point, but\[
+        \int_0^1 |f'(t)|~dt =\infty    
+    \]
+
+    So $f'\not\in L^1$. But we still have:\[
+        f(x) = \lim_{\epsilon\rightarrow 0}\int_\epsilon^x f'(t)~dt = \int_0^x f'(t)~dt    
+    \]
+
+    \item Suppose $f$ is continuous on $[a,b]$, $f$ is differentiable at almost every point of $[a,b]$ and $f'\in L^1$ on $[a,b]$. Do these assumptions imply that $f(x) - f(a) = \int_a^x f'$
+    
+    \textsc{NO!}
+
+    \
+
+    Choose $\{\delta_n\}$ so that $1 = \delta_0>\delta_1>\cdots$, where $\delta_n\rightarrow 0$, we define the sets $E_n$ recursively. Put $E_0 = [0,1]$ and if $n\geq 0$ and $E_n$ is constructed so that it is the union of $2^n$ disjoint closed intervals, each of length $2^{-n}\delta_n$. 
+    
+    Delete a segment in the center of each of the $2^n$ intervals, so that each $2^{n+1}$ intervals have length $2^{-(n+1)}\delta_{n+1}$, and let $E_{n+1}$ be the union of these $2^{n+1}$ intervals. So we have $E_1\supseteq E_2\supseteq \ldots$, and $m(E_n) = \delta_n$ for all $n$. Now let\[
+        E = \bigcap_{n=1}^\infty E_n    
+    \]
+
+    Note since each $E_n$ is the finite union of closed sets, they are closed so $E$ is also closed, it is also bounded since it is contained in $[0,1]$. So $E$ is compact and $m(E) = \lim_{n\rightarrow \infty}m(E_n) = \lim_{n\rightarrow \infty}\delta_n = 0$. Put \[
+        g_n = \delta_n^{-1}\chi_{E_n} \text{ and } f_n(x) = \int_0^x g_n(t)~dt \text{ for }n=0,1,2,\ldots    
+    \]
+
+    So note $f_n(0) = 0$ and $f_n(1) = \delta_n^{-1}\int_0^1 \chi_{E_n} = \delta_n^{-1}m(E_n) = 1$. Each $f_n$ is a monotonic function which is constant on each segment in $E_n^c$.
+    If $I$ is one of the $2^n$ interval whose union is $E_n$, then\[
+        \int_I g_n(t)~dt = \int_I g_{n+1}(t)~dt = 2^{-n}.    
+    \]
+
+    Therefore we see that \[
+        f_{n+1}(x) = f_n(x)  \text{ for }x\not\in E_n   
+    \]
+
+    Now note that \[
+        |f_n(x) - f_{n+1}(x)|\leq \int_I |g_n-g_{n+1}|<2^{-(n-1)} \text{ for } x\in E_n    
+    \]
+
+    So $\{f_n\}$ converges uniformely to a continuous monotonic function $f$, with $f(0) = 0$, $f(1) = 1$, and $f'(x) = 0$ for all $x\not\in E$. Since $m(E) = 0$, we see that $f' = 0$ almost everywhere. So\[
+        f(x) \neq \int_0^x f' \text{ in general}    
+    \]
+
+    \begin{definition}\index{absolutely continuous}
+        A complex function $f$, defined on an interval $I = [a,b]$ is said to be \textbf{absolutely continuous} on $I$ (or $f$ is AC on $I$) if for all $\epsilon>0$ there is a $\delta>0$ such that\[
+            \sum_{i=1}^n|f(\beta_i)-f(\alpha_i)|<\epsilon    
+        \]
+        For all $n$m and any disjoint collection of segments $(\alpha_1,\beta_1),\ldots,(\alpha_n,\beta_n)$ in $I$ whose length satisfy\[
+            \sum_{i=1}^n (\beta_i-\alpha_i)<\delta    
+        \]
+        \begin{remark}
+            Such an $f$ is continuous since we can choose $n=1$.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}\label{7.18}
+        Let $I=[a,b]$ and $f\colon I\rightarrow \R$ be continuous and nondecreasing. TFAE\begin{enumerate}[label=(\alph*)]
+            \item $f$ is AC on $I$
+            \item $f$ maps sets of measure $0$ to sets of measure of $0$.
+            \item $f$ is differentiable a.e. on $I$, $f'\in L^1$ and \[
+                f(x) - f(a) = \int_a^x f'(t)~dt \text{ for }(a\leq x\leq b)    
+            \]
+        \end{enumerate}
+    \end{theorem}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \printindex
 \end{document}
