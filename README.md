@@ -1,8 +1,11 @@
-
 # Rudin_Real_and_complex_analysis
-
 Notes and Solutions to "Real and Complex Analysis", by W. Rudin
+-------------
 
----
+# Lecture notes
 
-Lecture notes may look better with inverted colours. Notes will be reformatted as most of them are currently too big to upload.
+Notes are from chapter 7 onwards.
+
+# Solutions
+
+Are updated as I work through them.
